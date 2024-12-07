@@ -42,7 +42,8 @@ WORKDIR /project/${KOBWEB_APP_ROOT}
 RUN mkdir ~/.gradle && \
     echo "org.gradle.jvmargs=-Xmx256m" >> ~/.gradle/gradle.properties
 
-RUN kobweb export --notty
+RUN kobweb export --notty || echo "Export failed" \
+    && ls -al /project/${KOBWEB_APP_ROOT}
 
 #-----------------------------------------------------------------------------
 # Create the final stage, which contains just enough bits to run the Kobweb
@@ -52,5 +53,9 @@ FROM openjdk:11-jre-slim as run
 ARG KOBWEB_APP_ROOT
 
 COPY --from=export /project/${KOBWEB_APP_ROOT}/.kobweb .kobweb
+
+# Verify the existence of the start script
+RUN [ -x ".kobweb/server/start.sh" ] || (echo "Start script missing or not executable" && exit 1)
+
 
 ENTRYPOINT .kobweb/server/start.sh
