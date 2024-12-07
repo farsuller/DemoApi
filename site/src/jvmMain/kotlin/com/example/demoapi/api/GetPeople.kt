@@ -16,9 +16,8 @@ private val people = listOf(
     Person(name = "Grace", age = 24)
 )
 
-
 @Api
-suspend fun getPeople(context: ApiContext){
+suspend fun getPeople(context: ApiContext) {
     try {
         val number = context.req.params.getValue("count").toInt()
         context.res.setBodyText(
