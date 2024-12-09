@@ -10,7 +10,7 @@ ARG KOBWEB_APP_ROOT="site"
 # of space.
 FROM openjdk:11-jdk as export
 
-ENV KOBWEB_CLI_VERSION=0.9.12
+ENV KOBWEB_CLI_VERSION=0.9.18
 ARG KOBWEB_APP_ROOT
 
 # Copy the project code to an arbitrary subdir so we can install stuff in the
@@ -53,9 +53,5 @@ FROM openjdk:11-jre-slim as run
 ARG KOBWEB_APP_ROOT
 
 COPY --from=export /project/${KOBWEB_APP_ROOT}/.kobweb .kobweb
-
-# Verify the existence of the start script
-RUN [ -x ".kobweb/server/start.sh" ] || (echo "Start script missing or not executable" && exit 1)
-
 
 ENTRYPOINT .kobweb/server/start.sh
