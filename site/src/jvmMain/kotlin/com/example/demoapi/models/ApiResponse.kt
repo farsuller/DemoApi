@@ -1,17 +1,18 @@
 package com.example.demoapi.models
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class ApiResponse {
+sealed class ApiResponse<T> {
 
     @Serializable
     @SerialName("success")
-    data class Success (val data : List<Person>) : ApiResponse()
+    data class Success<T> (@Contextual val data: T) : ApiResponse<T>()
 
     @Serializable
     @SerialName("error")
-    data class Error (val errorMessage: String) : ApiResponse()
+    data class Error<T> (val errorMessage: String) : ApiResponse<T>()
 
 }
