@@ -1,4 +1,4 @@
-package com.example.demoapi.models
+package com.example.demoapi.dto
 
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
