@@ -32,9 +32,9 @@ val schools = listOf(
         id = 2,
         schoolName = "Ateneo de Manila University",
         description = "Ateneo de Manila University offers business, law, engineering, and arts programs. It also provides commerce, governance, medicine, and social sciences programs. People honor ADMU for its strong stress on research and humanistic learning. ",
-        address = "Test School Address",
-        latitude = 0.0,
-        longitude = 0.0
+        address = "Katipunan Ave, Quezon City, 1108 Metro Manila",
+        latitude = 14.6396,
+        longitude = 121.0786
     ),
     School(
         id = 3,
